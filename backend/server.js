@@ -23,13 +23,21 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: "*",
+    origin:
+      "https://junglechat-frontend.onrender.com",
+    methods: ["GET", "POST"],
   },
 });
 
 initSocket(io);
 
-app.use(cors());
+app.use(
+  cors({
+    origin:
+      "https://junglechat-frontend.onrender.com",
+    credentials: true,
+  })
+);
 app.use(express.json());
 
 app.use("/api/auth", authRoutes);
